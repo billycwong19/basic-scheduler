@@ -15,7 +15,7 @@ function generator() {
             timeBlock.addClass('container-fluid timeBlock vw-100 row')
             timeBlock.insertAfter(timeBlockList);
         var hour = $("<h3 class= " + hoursOfTheDay[i] + ">")
-            hour.addClass('hour col-3 col-md-2 col-lg-1')
+            hour.addClass('hour col-2')
             if (hoursOfTheDay[i] > 12){
                 hour.text((hoursOfTheDay[i] - 12) + " PM");
             } else {
@@ -23,10 +23,17 @@ function generator() {
             }
             timeBlock.append(hour);
         var activity = $("<input type=text>")
-            activity.addClass('activity col-6 col-md-8 col-lg-10')
+        console.log(currentHour)
+                if (currentHour > hoursOfTheDay[i]){
+                    activity.addClass('activity col-8 past')
+                } else if (currentHour < hoursOfTheDay[i]){
+                    activity.addClass('activity col-8 future')
+                } else {
+                    activity.addClass('activity col-8 present')
+                }  
             activity.insertAfter(hour)
         var saveBtn = $("<button>")
-            saveBtn.addClass('saveBtn col-3 col-md-2 col-lg-1')
+            saveBtn.addClass('saveBtn col-2')
             saveBtn.insertAfter(activity)
         var icon = $("<i>")
             icon.addClass("fas fa-save")
@@ -35,34 +42,11 @@ function generator() {
         compare();
     }
 
-function compare(){
-    var activity = $('.activity')
-for (let i = 0; i < hoursOfTheDay.length; i++){
-    if (currentHour === hoursOfTheDay[i]){
-        activity.addClass('present')
-      
-    } else if (currentHour > hoursOfTheDay[i]){
-        activity.addClass('past')
-     
-    } else {
-        activity.addClass('future')
-        }
-    }
-}
-
 function save(){
     var activity = $('.activity')
     var input = activity.text();
     input = localStorage.setItem(JSON.stringify(right))
 }
-
-function logActivity(event) {
-    var activity = $('.activity')
-    var input = activity.text();
-    var target = $(event.target);
-    
-  }
-timeBlockList.click(logActivity);
   
 function init(){
     generator();
