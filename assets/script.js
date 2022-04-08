@@ -75,6 +75,7 @@ function scheduleAlert(getValue, target){
         storedAlert.insertAfter(currentTime); // this might be unnecessary since its position is fixed but it displays it to the screen so i guess it could really be insterted anywhere
         removeElement()     
 }
+// this was taken off of stackoverflow by an amazing user who i can remember! IM SORRY!
 // this function is called after the scheduleAlert message displays. it animates its slow fade out
 function removeElement() {
     $('.flashAlert').animate({
